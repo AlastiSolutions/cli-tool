@@ -4,7 +4,7 @@ import chalk from "chalk";
 import figlet from "figlet";
 import inquirer from "inquirer";
 import gradient from "gradient-string";
-import chalkAnimation from "chalk-animation";
+// import chalkAnimation from "chalk-animation"
 
 import { execSync } from "child_process";
 import { createSpinner } from "nanospinner";
@@ -20,13 +20,7 @@ async function welcome() {
     console.log(gradient.pastel.multiline(data));
   });
 
-  const rainbowTitle = chalkAnimation.rainbow(
-    "Welcome to our Official CLI Tool! \n"
-  );
-
-  //   rainbowTitle.start();
   await sleep();
-  //   rainbowTitle.stop();
 
   console.log(`
     ${chalk.blueBright("WHAT TO DO")}
@@ -49,7 +43,9 @@ async function handleAnswer(choice: string) {
     ).start();
     // await sleep();
     execSync(`pnpm create vite@latest ${PROJECT_NAME}  --template react-ts`);
-    spinner.success({ text: "Project created successfully!" });
+    spinner.success({
+      text: "Project created successfully! Don't forget to npm i",
+    });
     process.exit(0);
   } else if (choice === "react") {
     const spinner = createSpinner(
@@ -65,9 +61,11 @@ async function handleAnswer(choice: string) {
     ).start();
     // await sleep();
     execSync(
-      `pnpm create next-app ${PROJECT_NAME} --ts --tailwind --eslint --app --src-dir --use-pnpm`
+      `pnpm create next-app ${PROJECT_NAME} --ts --tailwind --eslint --app --src-dir --import-alias @/* --use-pnpm --skip-install`
     );
-    spinner.success({ text: "Project created successfully!" });
+    spinner.success({
+      text: "Project created successfully! Don't forget to pnpm i",
+    });
     process.exit(0);
   } else {
     const spinner = createSpinner(`Please wait while we run ${choice}`).start();
