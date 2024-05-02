@@ -1,11 +1,12 @@
 {
   "name": "@kourosh-alasti/cli-tool",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "CLI Tools commonly used by AlastiSolutions",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "npx tsc | node ./dist/index.js"
+    "compile": "npx tsc",
+    "test": "node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
