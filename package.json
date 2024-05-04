@@ -1,14 +1,20 @@
 {
   "name": "@kourosh-alasti/cli-tool",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "CLI Tools commonly used by AlastiSolutions",
   "main": "index.js",
   "type": "module",
+  "repository": "https://github.com/alastisolutions/cli-tool",
   "scripts": {
     "compile": "npx tsc",
     "test": "node ./dist/index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "nextjs",
+    "typescript",
+    "react",
+    "vite"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
