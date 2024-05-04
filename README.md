@@ -1,11 +1,6 @@
 ### Common tools I use for development
 
-#### Errors
-
-- Current issues with creating a next app.
-- Load time with create-react-app are very high
-
-#### How to run
+### How to run
 
 pnpm
 
