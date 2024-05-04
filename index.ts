@@ -47,14 +47,14 @@ async function handleAnswer(choice: string) {
       text: "Project created successfully! Don't forget to npm i",
     });
     process.exit(0);
-  } else if (choice === "react") {
-    const spinner = createSpinner(
-      "Please wait while we run create-react-app\n"
-    ).start();
-    // await sleep();
-    execSync(`npx create-react-app ${PROJECT_NAME} --template typescript`);
-    spinner.success({ text: "Project created successfully!" });
-    process.exit(0);
+    // } else if (choice === "react") {
+    //   const spinner = createSpinner(
+    //     "Please wait while we run create-react-app\n"
+    //   ).start();
+    //   // await sleep();
+    //   execSync(`npx create-react-app ${PROJECT_NAME} --template typescript`);
+    //   spinner.success({ text: "Project created successfully!" });
+    //   process.exit(0);
   } else if (choice === "next") {
     const spinner = createSpinner(
       "Please wait while we run next-app\n"
@@ -93,7 +93,7 @@ async function getProjectType() {
     name: "project_type",
     type: "list",
     message: "What type of project do you want to create?\n",
-    choices: ["react-vite", "react", "next"],
+    choices: ["react-vite", "next"],
   });
 
   return handleAnswer(answers.project_type);
