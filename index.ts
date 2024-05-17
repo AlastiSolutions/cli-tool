@@ -36,45 +36,6 @@ async function welcome() {
     `);
 }
 
-async function handleAnswer(choice: string) {
-  if (choice === "react-vite") {
-    const spinner = createSpinner(
-      "Please wait while we run vite@latest\n"
-    ).start();
-    // await sleep();
-    execSync(`pnpm create vite@latest ${PROJECT_NAME}  --template react-ts`);
-    spinner.success({
-      text: "Project created successfully! Don't forget to npm i",
-    });
-    process.exit(0);
-    // } else if (choice === "react") {
-    //   const spinner = createSpinner(
-    //     "Please wait while we run create-react-app\n"
-    //   ).start();
-    //   // await sleep();
-    //   execSync(`npx create-react-app ${PROJECT_NAME} --template typescript`);
-    //   spinner.success({ text: "Project created successfully!" });
-    //   process.exit(0);
-  } else if (choice === "next") {
-    const spinner = createSpinner(
-      "Please wait while we run next-app\n"
-    ).start();
-    // await sleep();
-    execSync(
-      `pnpm create next-app ${PROJECT_NAME} --ts --tailwind --eslint --app --src-dir --import-alias @/* --use-pnpm --skip-install`
-    );
-    spinner.success({
-      text: "Project created successfully! Don't forget to pnpm i",
-    });
-    process.exit(0);
-  } else {
-    const spinner = createSpinner(`Please wait while we run ${choice}`).start();
-    await sleep();
-    spinner.error({ text: "Please choose a valid project type!" });
-    process.exit(1);
-  }
-}
-
 async function getProjectName() {
   const answers = await inquirer.prompt({
     name: "project_name",
@@ -97,6 +58,43 @@ async function getProjectType() {
   });
 
   return handleAnswer(answers.project_type);
+}
+
+async function handleAnswer(choice: string) {
+  if (choice === "react-vite") {
+    createViteReactApp();
+  } else if (choice === "next") {
+    createNextApp();
+  } else {
+    const spinner = createSpinner(`Please wait while we run ${choice}`).start();
+    await sleep();
+    spinner.error({ text: "Please choose a valid project type!" });
+    process.exit(1);
+  }
+}
+
+async function createNextApp() {
+  const spinner = createSpinner("Please wait while we run next-app\n").start();
+  execSync(
+    `pnpm create next-app ${PROJECT_NAME} --ts --tailwind --eslint --app --src-dir --import-alias @/* --use-pnpm --skip-install | pnpm i -d prettier-plugin-tailwind drizzle-kit | pnpm i zod react-hook-form @clerk/nextjs drizzle-orm `
+  );
+  spinner.success({
+    text: "Project created successfully!",
+  });
+  process.exit(0);
+}
+
+async function createViteReactApp() {
+  const spinner = createSpinner(
+    "Please wait while we run vite@latest\n"
+  ).start();
+  execSync(
+    `pnpm create vite@latest ${PROJECT_NAME}  --template react-ts | pnpm i -d prettier-plugin-tailwind`
+  );
+  spinner.success({
+    text: "Project created successfully! Don't forget to npm i",
+  });
+  process.exit(0);
 }
 
 await welcome();
