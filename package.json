@@ -13,7 +13,8 @@
     "nextjs",
     "typescript",
     "react",
-    "vite"
+    "vite",
+    "tailwindcss"
   ],
   "author": "Kourosh Alasti <coding@kouroshalasti.com>",
   "license": "ISC",

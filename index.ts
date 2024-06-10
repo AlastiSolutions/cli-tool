@@ -13,6 +13,15 @@ let PROJECT_NAME: string = "";
 
 const sleep = (ms: number = 3000) => new Promise((r) => setTimeout(r, ms));
 
+/**
+ * Function to display a welcome message and instructions to the user.
+ * It uses figlet and gradient-string libraries to create a stylized title.
+ * It then prints a welcome message, instructions, and warnings to the console.
+ *
+ * @returns {Promise<void>} - The function does not return anything.
+ *
+ * @throws Will throw an error if figlet or gradient-string libraries are not installed.
+ */
 async function welcome() {
   const title = "AlastiSolutions CLI Tool!";
 
@@ -44,7 +53,7 @@ async function welcome() {
  *
  * @returns {Promise<void>} - The function does not return anything.
  */
-async function getProjectName() {
+async function getProjectName(): Promise<void> {
   const answers = await inquirer.prompt({
     name: "project_name",
     type: "input",
@@ -66,7 +75,7 @@ async function getProjectName() {
  * @returns {Promise<void>} - The function does not return anything.
  * It calls the handleAnswer function with the selected project type.
  */
-async function getProjectType() {
+async function getProjectType(): Promise<void> {
   const answers = await inquirer.prompt({
     name: "project_type",
     type: "list",
@@ -88,7 +97,7 @@ async function getProjectType() {
  *
  * @throws Will throw an error if an invalid project type is chosen.
  */
-async function handleAnswer(choice: string) {
+async function handleAnswer(choice: string): Promise<void> {
   if (choice === "react-vite") {
     // Call the function to create a Vite React app
     createViteReactApp();
@@ -113,7 +122,7 @@ async function handleAnswer(choice: string) {
  *
  * @throws Will throw an error if the command execution fails.
  */
-async function createNextApp() {
+async function createNextApp(): Promise<void> {
   const spinner = createSpinner("Please wait while we run next-app\n").start();
   execSync(
     `pnpm create next-app ${PROJECT_NAME} --ts --tailwind --eslint --app --src-dir --import-alias @/* --use-pnpm --skip-install | cd ${PROJECT_NAME} | pnpm i -d prettier-plugin-tailwind drizzle-kit | pnpm i zod react-hook-form @clerk/nextjs drizzle-orm `
@@ -133,7 +142,7 @@ async function createNextApp() {
  *
  * @throws Will throw an error if the command execution fails.
  */
-async function createViteReactApp() {
+async function createViteReactApp(): Promise<void> {
   const spinner = createSpinner(
     "Please wait while we run vite@latest\n"
   ).start();
