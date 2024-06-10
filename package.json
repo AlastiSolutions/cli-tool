@@ -15,7 +15,7 @@
     "react",
     "vite"
   ],
-  "author": "",
+  "author": "Kourosh Alasti <coding@kouroshalasti.com>",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^20.12.7",
