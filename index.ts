@@ -36,6 +36,14 @@ async function welcome() {
     `);
 }
 
+/**
+ * Function to get the project name from the user.
+ * It uses inquirer to prompt the user for the project name.
+ * If the user does not provide a name, it defaults to "my-project".
+ * The project name is then stored in the PROJECT_NAME variable.
+ *
+ * @returns {Promise<void>} - The function does not return anything.
+ */
 async function getProjectName() {
   const answers = await inquirer.prompt({
     name: "project_name",
@@ -46,9 +54,18 @@ async function getProjectName() {
     },
   });
 
+  // Store the global project name in the PROJECT_NAME variable
   PROJECT_NAME = answers.project_name;
 }
 
+/**
+ * Function to get the project type from the user.
+ * It uses inquirer to prompt the user for the project type.
+ * The choices are "react-vite" and "next".
+ *
+ * @returns {Promise<void>} - The function does not return anything.
+ * It calls the handleAnswer function with the selected project type.
+ */
 async function getProjectType() {
   const answers = await inquirer.prompt({
     name: "project_type",
@@ -57,15 +74,29 @@ async function getProjectType() {
     choices: ["react-vite", "next"],
   });
 
+  // Call the handleAnswer function with the selected project type
   return handleAnswer(answers.project_type);
 }
 
+/**
+ * Function to handle the user's choice of project type.
+ * Depending on the user's choice, it calls the appropriate function to create the project.
+ *
+ * @param choice - The user's choice of project type. It can be either "react-vite" or "next".
+ *
+ * @returns {Promise<void>} - The function does not return anything.
+ *
+ * @throws Will throw an error if an invalid project type is chosen.
+ */
 async function handleAnswer(choice: string) {
   if (choice === "react-vite") {
+    // Call the function to create a Vite React app
     createViteReactApp();
   } else if (choice === "next") {
+    // Call the function to create a Next.js app
     createNextApp();
   } else {
+    // If an invalid project type is chosen, display an error message and exit the process
     const spinner = createSpinner(`Please wait while we run ${choice}`).start();
     await sleep();
     spinner.error({ text: "Please choose a valid project type!" });
@@ -73,10 +104,19 @@ async function handleAnswer(choice: string) {
   }
 }
 
+/**
+ * Function to create a Next.js app.
+ * This function uses the `execSync` function to run a command that creates a new Next.js app with the specified project name.
+ * It also installs additional dependencies using `pnpm` and displays a success message using a spinner.
+ *
+ * @returns {Promise<void>} - The function does not return anything.
+ *
+ * @throws Will throw an error if the command execution fails.
+ */
 async function createNextApp() {
   const spinner = createSpinner("Please wait while we run next-app\n").start();
   execSync(
-    `pnpm create next-app ${PROJECT_NAME} --ts --tailwind --eslint --app --src-dir --import-alias @/* --use-pnpm --skip-install | pnpm i -d prettier-plugin-tailwind drizzle-kit | pnpm i zod react-hook-form @clerk/nextjs drizzle-orm `
+    `pnpm create next-app ${PROJECT_NAME} --ts --tailwind --eslint --app --src-dir --import-alias @/* --use-pnpm --skip-install | cd ${PROJECT_NAME} | pnpm i -d prettier-plugin-tailwind drizzle-kit | pnpm i zod react-hook-form @clerk/nextjs drizzle-orm `
   );
   spinner.success({
     text: "Project created successfully!",
@@ -84,12 +124,21 @@ async function createNextApp() {
   process.exit(0);
 }
 
+/**
+ * Function to create a Vite React app.
+ * This function uses the `execSync` function to run a command that creates a new Vite React app with the specified project name.
+ * It also installs the `prettier-plugin-tailwind` as a development dependency.
+ *
+ * @returns {Promise<void>} - The function does not return anything.
+ *
+ * @throws Will throw an error if the command execution fails.
+ */
 async function createViteReactApp() {
   const spinner = createSpinner(
     "Please wait while we run vite@latest\n"
   ).start();
   execSync(
-    `pnpm create vite@latest ${PROJECT_NAME}  --template react-ts | pnpm i -d prettier-plugin-tailwind`
+    `pnpm create vite@latest ${PROJECT_NAME}  --template react-ts | cd ${PROJECT_NAME} | pnpm i -d prettier-plugin-tailwind`
   );
   spinner.success({
     text: "Project created successfully! Don't forget to npm i",
