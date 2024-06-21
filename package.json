@@ -1,6 +1,6 @@
 {
   "name": "@kourosh-alasti/cli-tool",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "CLI Tools commonly used by AlastiSolutions",
   "main": "index.js",
   "type": "module",

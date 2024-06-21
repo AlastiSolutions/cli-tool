@@ -39,7 +39,7 @@ async function welcome() {
 
     If you press CTRL + C, I will be ${chalk.redBright("exited")}
 
-    ${chalk.yellowBright("Don't run this tool in a production environment.")}
+    ${chalk.bgRed("Don't run this tool in a production environment.")}
 
     Let's start!
     `);
@@ -124,12 +124,23 @@ async function handleAnswer(choice: string): Promise<void> {
  */
 async function createNextApp(): Promise<void> {
   const spinner = createSpinner("Please wait while we run next-app\n").start();
-  execSync(
-    `pnpm create next-app ${PROJECT_NAME} --ts --tailwind --eslint --app --src-dir --import-alias @/* --use-pnpm --skip-install | cd ${PROJECT_NAME} | pnpm i -d prettier-plugin-tailwind drizzle-kit | pnpm i zod react-hook-form @clerk/nextjs drizzle-orm `
-  );
+  // execSync(
+  //   `pnpm create next-app ${PROJECT_NAME} --ts --tailwind --eslint --app --src-dir --import-alias @/* --use-pnpm --skip-install | cd ${PROJECT_NAME} | pnpm i -d prettier-plugin-tailwind drizzle-kit | pnpm i zod react-hook-form @clerk/nextjs drizzle-orm `
+  // );
+  // execSync(`mkdir ${PROJECT_NAME} && cd ${PROJECT_NAME}`);
+  execSync(`git clone https://github.com/alastisolutions/nextjs-template.git`);
+
   spinner.success({
     text: "Project created successfully!",
   });
+
+  console.log(
+    `\n\n${chalk.yellowBright(
+      "Don't forget to rename the folder and run "
+    )}${chalk.underline(
+      chalk.bgGreen(chalk.black("pnpm install"))
+    )}${chalk.yellowBright("!")}`
+  );
   process.exit(0);
 }
 
@@ -156,5 +167,5 @@ async function createViteReactApp(): Promise<void> {
 }
 
 await welcome();
-await getProjectName();
+// await getProjectName();
 await getProjectType();
