@@ -7,7 +7,8 @@
   "repository": "https://github.com/alastisolutions/cli-tool",
   "scripts": {
     "compile": "npx tsc",
-    "test": "node ./dist/index.js"
+    "test": "node ./dist/index.js",
+    "prepare": "husky"
   },
   "keywords": [
     "nextjs",
@@ -32,6 +33,7 @@
     "cli-tool": "dist/index.js"
   },
   "devDependencies": {
+    "husky": "^9.0.11",
     "ts-node": "^10.9.2"
   }
 }

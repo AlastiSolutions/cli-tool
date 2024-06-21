@@ -31,6 +31,9 @@ dependencies:
     version: 5.5.2
 
 devDependencies:
+  husky:
+    specifier: ^9.0.11
+    version: 9.0.11
   ts-node:
     specifier: ^10.9.2
     version: 10.9.2(@types/node@20.14.7)(typescript@5.5.2)
@@ -465,6 +468,12 @@ packages:
     dependencies:
       lru-cache: 6.0.0
     dev: false
+
+  /husky@9.0.11:
+    resolution: {integrity: sha512-AB6lFlbwwyIqMdHYhwPe+kjOC3Oc5P3nThEoW/AaO2BX3vJDjWPFxYLxokUZOo6RNX20He3AaT8sESs9NJcmEw==}
+    engines: {node: '>=18'}
+    hasBin: true
+    dev: true
 
   /iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
