@@ -35,8 +35,6 @@ async function welcome() {
     ${chalk.blueBright("WHAT TO DO")}
     I am a CLI tool for AlastiSolutions.
 
-    ${chalk.bold("Currently having issues with next js. Apologies!")}
-
     If you press CTRL + C, I will be ${chalk.redBright("exited")}
 
     ${chalk.bgRed("Don't run this tool in a production environment.")}
@@ -157,12 +155,25 @@ async function createViteReactApp(): Promise<void> {
   const spinner = createSpinner(
     "Please wait while we run vite@latest\n"
   ).start();
+  // execSync(
+  //   `pnpm create vite@latest ${PROJECT_NAME}  --template react-ts | cd ${PROJECT_NAME} | pnpm i -d prettier-plugin-tailwind`
+  // );
+
   execSync(
-    `pnpm create vite@latest ${PROJECT_NAME}  --template react-ts | cd ${PROJECT_NAME} | pnpm i -d prettier-plugin-tailwind`
+    `git clone https://github.com/alastisolutions/reactvite-template.git`
   );
+
   spinner.success({
-    text: "Project created successfully! Don't forget to npm i",
+    text: "Project created successfully!",
   });
+
+  console.log(
+    `\n\n${chalk.yellowBright(
+      "Don't forget to rename the folder and run "
+    )}${chalk.underline(
+      chalk.bgGreen(chalk.black("pnpm install"))
+    )}${chalk.yellowBright("!")}`
+  );
   process.exit(0);
 }
 
